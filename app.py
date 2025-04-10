@@ -31,7 +31,7 @@ if uploaded_file:
             venc = row['Vencimento'].strftime('%d/%m/%Y') if not pd.isnull(row['Vencimento']) else '---'
             taxa = row['Tx. Portal']
             minimo = f"R$ {float(row['Aplicação mínima']):,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
-            info = f"🏦**{produto} {nome}**\n⏰ Vencimento: {venc}\n📈 Taxa: {taxa}\n💰mínimo: {minimo}\n"
+            info = f"🏦*{produto} {nome}*\n⏰ Vencimento: {venc}\n📈 Taxa: {taxa}\n💰mínimo: {minimo}\n"
             return info
 
         # Separar em isentos e não isentos
