@@ -38,7 +38,7 @@ if uploaded_file:
                 taxa_formatada = str(taxa)
 
             minimo = f"R$ {float(row['Aplicação mínima']):,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
-            info = f"🏦*{produto} {nome}*\n⏰ Vencimento: {venc}\n📈 Taxa: {taxa}\n💰mínimo: {minimo}\n"
+            info = f"🏦*{produto} {nome}*\n⏰ Vencimento: {venc}\n📈 Taxa: {taxa_formatada}\n💰mínimo: {minimo}\n"
             return info
 
         # Separar em isentos e não isentos
