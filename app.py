@@ -26,9 +26,9 @@ if uploaded_file:
             return df[df['Indexador'].str.upper().str.contains(tipo, na=False)]
 
         def formatar_ativo(row):
-        produto = row['Produto']
-        nome = row['Emissor']
-        venc = row['Vencimento'].strftime('%d/%m/%Y') if not pd.isnull(row['Vencimento']) else '---'
+            produto = row['Produto']
+            nome = row['Emissor']
+            venc = row['Vencimento'].strftime('%d/%m/%Y') if not pd.isnull(row['Vencimento']) else '---'
 
         # Tratar taxa
         taxa = row['Tx. Portal']
