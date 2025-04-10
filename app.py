@@ -22,8 +22,12 @@ if uploaded_file:
         def nao_isento(produto):
             return 'CDB' in produto.upper()
 
-        def separar_por_indexador(df, tipo):
-            return df[df['Indexador'].str.upper().str.contains(tipo, na=False)]
+        def separar_top_3_por_indexador(df, tipo):
+            filtrado = df[df['Indexador'].str.upper().str.contains(tipo, na=False)]
+            # garantir que a coluna Tx. Portal seja numérica (ignorar erros se vier string)
+            filtrado['Tx. Portal'] = pd.to_numeric(filtrado['Tx. Portal'], errors='coerce')
+            return filtrado.sort_values(by='Tx. Portal', ascending=False).head(3)
+
 
         def formatar_ativo(row):
             produto = row['Produto']
@@ -78,20 +82,29 @@ if uploaded_file:
         #hoje = datetime.today().strftime('%A %d/%m').capitalize()
         mensagem = f"🚨*TAXAS DE HOJE ({hoje})*\n\n‼️ *DESTAQUE CRÉDITO BANCÁRIO - ISENTOS* ‼️\n\n📍*PÓS-FIXADOS*\n\n"
 
-        for _, row in separar_por_indexador(bancarios_isentos, 'CDI').iterrows():
+        for _, row in separar_top_3_por_indexador(bancarios_isentos, 'CDI').iterrows():
             mensagem += formatar_ativo(row) + '\n'
 
-        mensagem += "\n📍*PRÉ-FIXADOS*\n\n"
-        for _, row in separar_por_indexador(bancarios_isentos, 'PRE').iterrows():
+        mensagem += "\n📍*PRÉ-FIXADOS*\n"
+        for _, row in separar_top_3_por_indexador(bancarios_isentos, 'PRÉ').iterrows():
             mensagem += formatar_ativo(row) + '\n'
 
-        mensagem += "\n‼️ *DESTAQUE CRÉDITO BANCÁRIO - NÃO ISENTOS* ‼️\n\n📍*PÓS-FIXADOS*\n\n"
-        for _, row in separar_por_indexador(bancarios_nao_isentos, 'CDI').iterrows():
+        mensagem += "\n📍*IPCA+*\n"
+        for _, row in separar_top_3_por_indexador(bancarios_isentos, 'IPCA').iterrows():
             mensagem += formatar_ativo(row) + '\n'
 
-        mensagem += "\n📍*PRÉ-FIXADOS*\n\n"
-        for _, row in separar_por_indexador(bancarios_nao_isentos, 'PRÉ').iterrows():
+
+        for _, row in separar_top_3_por_indexador(bancarios_isentos, 'CDI').iterrows():
             mensagem += formatar_ativo(row) + '\n'
+
+        mensagem += "\n📍*PRÉ-FIXADOS*\n"
+        for _, row in separar_top_3_por_indexador(bancarios_isentos, 'PRÉ').iterrows():
+            mensagem += formatar_ativo(row) + '\n'
+
+        mensagem += "\n📍*IPCA+*\n"
+        for _, row in separar_top_3_por_indexador(bancarios_isentos, 'IPCA').iterrows():
+            mensagem += formatar_ativo(row) + '\n'
+
 
         # Exibir resultado
         st.subheader("📋 Mensagem Gerada")
