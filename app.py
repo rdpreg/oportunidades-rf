@@ -32,7 +32,7 @@ if uploaded_file:
                     num = ''.join(c for c in t if (c.isdigit() or c == '.'))
                     try:
                         return float(num)
-                except:
+                    except:
                         return None
                 elif isinstance(t, (int, float)):
                     return t
