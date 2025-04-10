@@ -32,7 +32,7 @@ if uploaded_file:
             mensagem += formatar_ativo(row) + '\n'
 
         mensagem += "\n📍*PRÉ-FIXADOS*\n"
-        for _, row in separar_por_indexador(bancarios, 'PRÉ').iterrows():
+        for _, row in separar_por_indexador(bancarios, 'PRE').iterrows():
             mensagem += formatar_ativo(row) + '\n'
 
         st.subheader("📋 Mensagem Gerada")
