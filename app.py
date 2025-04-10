@@ -30,29 +30,29 @@ if uploaded_file:
             nome = row['Emissor']
             venc = row['Vencimento'].strftime('%d/%m/%Y') if not pd.isnull(row['Vencimento']) else '---'
 
-        # Tratar taxa
-        taxa = row['Tx. Portal']
-        if isinstance(taxa, (int, float)) and taxa < 1:
-            taxa_formatada = f"{taxa * 100:.0f}%"
-        elif isinstance(taxa, (int, float)):
-            taxa_formatada = f"{taxa:.2f}%"
-        else:
-            taxa_formatada = str(taxa)
+            # Tratar taxa
+            taxa = row['Tx. Portal']
+            if isinstance(taxa, (int, float)) and taxa < 1:
+                taxa_formatada = f"{taxa * 100:.0f}%"
+            elif isinstance(taxa, (int, float)):
+                taxa_formatada = f"{taxa:.2f}%"
+            else:
+                taxa_formatada = str(taxa)
 
-        # Adicionar o tipo de taxa com base no indexador
-        indexador = row['Indexador'].upper() if isinstance(row['Indexador'], str) else ""
+            # Adicionar o tipo de taxa com base no indexador
+            indexador = row['Indexador'].upper() if isinstance(row['Indexador'], str) else ""
 
-        if "CDI" in indexador:
-            taxa_formatada += " do CDI"
-        elif "IPCA" in indexador:
-            taxa_formatada = f"IPCA + {taxa_formatada}"
+            if "CDI" in indexador:
+                taxa_formatada += " do CDI"
+            elif "IPCA" in indexador:
+                taxa_formatada = f"IPCA + {taxa_formatada}"
 
-        # Formatar valor mínimo
-        minimo = f"R$ {float(row['Aplicação mínima']):,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
+            # Formatar valor mínimo
+            minimo = f"R$ {float(row['Aplicação mínima']):,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
 
-        # Montar mensagem final
-        info = f"🏦*{produto} {nome}*\n⏰ Vencimento: {venc}\n📈 Taxa: {taxa_formatada}\n💰mínimo: {minimo}\n"
-        return info
+            # Montar mensagem final
+            info = f"🏦*{produto} {nome}*\n⏰ Vencimento: {venc}\n📈 Taxa: {taxa_formatada}\n💰mínimo: {minimo}\n"
+            return info
 
 
         # Separar em isentos e não isentos
