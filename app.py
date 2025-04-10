@@ -12,7 +12,7 @@ uploaded_file = st.file_uploader("📎 Envie o arquivo .xlsm", type=["xlsm"])
 if uploaded_file:
     try:
         # Carregar planilha
-        bancarios = pd.read_excel(uploaded_file, sheet_name="Crédito bancario")
+        bancarios = pd.read_excel(uploaded_file, sheet_name="Crédito bancário")
         bancarios.columns = bancarios.columns.str.strip()  # remove espaços nos nomes das colunas
 
         # Funções auxiliares
