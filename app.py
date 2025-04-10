@@ -38,6 +38,21 @@ if uploaded_file:
         bancarios_isentos = bancarios[bancarios['Produto'].apply(isento)]
         bancarios_nao_isentos = bancarios[bancarios['Produto'].apply(nao_isento)]
 
+        # Traduzir o dia da semana para português
+        dias_semana = {
+            "Monday": "Segunda-feira",
+            "Tuesday": "Terça-feira",
+            "Wednesday": "Quarta-feira",
+            "Thursday": "Quinta-feira",
+            "Friday": "Sexta-feira",
+            "Saturday": "Sábado",
+            "Sunday": "Domingo"
+            }
+
+        agora = datetime.today()
+        dia_semana = dias_semana[agora.strftime('%A')]
+        hoje = f"{dia_semana} {agora.strftime('%d/%m')}"
+
         # Montar mensagem
         hoje = datetime.today().strftime('%A %d/%m').capitalize()
         mensagem = f"‼️ *DESTAQUE CRÉDITO BANCÁRIO - ISENTOS* ‼️\n\n🚨*TAXAS DE HOJE ({hoje})*\n\n📍*PÓS-FIXADOS*\n"
