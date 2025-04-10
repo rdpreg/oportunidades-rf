@@ -76,7 +76,7 @@ if uploaded_file:
 
         # Montar mensagem
         #hoje = datetime.today().strftime('%A %d/%m').capitalize()
-        mensagem = f"‼️ *DESTAQUE CRÉDITO BANCÁRIO - ISENTOS* ‼️\n\n🚨*TAXAS DE HOJE ({hoje})*\n\n📍*PÓS-FIXADOS*\n"
+        mensagem = f"🚨*TAXAS DE HOJE ({hoje})*\n\n‼️ *DESTAQUE CRÉDITO BANCÁRIO - ISENTOS* ‼️\n\n📍*PÓS-FIXADOS*\n"
 
         for _, row in separar_por_indexador(bancarios_isentos, 'CDI').iterrows():
             mensagem += formatar_ativo(row) + '\n'
