@@ -12,8 +12,7 @@ uploaded_file = st.file_uploader("📎 Envie o arquivo .xlsm", type=["xlsm"])
 
 if uploaded_file:
     try:
-        bancarios = pd.read_excel(uploaded_file, sheet_name="bancarios")
-        credito = pd.read_excel(uploaded_file, sheet_name="credito")
+        bancarios = pd.read_excel(uploaded_file, sheet_name="Crédito bancario")
 
         def formatar_ativo(row):
             nome = row['Emissor']
