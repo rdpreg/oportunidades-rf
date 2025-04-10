@@ -68,7 +68,7 @@ if uploaded_file:
             mensagem += formatar_ativo(row) + '\n'
 
         mensagem += "\n📍*PRÉ-FIXADOS*\n"
-        for _, row in separar_por_indexador(bancarios_isentos, 'PRÉ').iterrows():
+        for _, row in separar_por_indexador(bancarios_isentos, 'PRE').iterrows():
             mensagem += formatar_ativo(row) + '\n'
 
         mensagem += "\n‼️ *DESTAQUE CRÉDITO BANCÁRIO - NÃO ISENTOS* ‼️\n\n📍*PÓS-FIXADOS*\n"
