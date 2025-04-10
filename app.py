@@ -24,7 +24,7 @@ if uploaded_file:
 Vencimento: {venc}
 Taxa: {taxa}
 R$  mínimo: {minimo}
-
+"
             return info
 
         def separar_por_indexador(df, tipo):
