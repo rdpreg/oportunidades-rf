@@ -11,7 +11,7 @@ uploaded_file = st.file_uploader("📎 Envie o arquivo .xlsm", type=["xlsm"])
 
 if uploaded_file:
     try:
-        bancarios = pd.read_excel(uploaded_file, sheet_name="Crédito bancario")
+        bancarios = pd.read_excel(uploaded_file, sheet_name="Crédito bancário")
         bancarios.columns = bancarios.columns.str.strip()  # Remove espaços em branco dos nomes das colunas
 
         def formatar_ativo(row):
