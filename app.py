@@ -52,7 +52,7 @@ if uploaded_file:
 
         # Montar mensagem final
         info = f"🏦*{produto} {nome}*\n⏰ Vencimento: {venc}\n📈 Taxa: {taxa_formatada}\n💰mínimo: {minimo}\n"
-            return info
+        return info
 
 
         # Separar em isentos e não isentos
