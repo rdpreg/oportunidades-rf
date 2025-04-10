@@ -33,3 +33,33 @@ if uploaded_file:
             minimo = f"R$ {float(row['Aplicação mínima']):,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
             info = f"🏦*{produto} {nome}*\n⏰ Vencimento: {venc}\n📈 Taxa: {taxa}\n💰mínimo: {minimo}\n"
             return info
+
+        # Separar em isentos e não isentos
+        bancarios_isentos = bancarios[bancarios['Produto'].apply(isento)]
+        bancarios_nao_isentos = bancarios[bancarios['Produto'].apply(nao_isento)]
+
+        # Montar mensagem
+        hoje = datetime.today().strftime('%A %d/%m').capitalize()
+        mensagem = f"‼️ *DESTAQUE CRÉDITO BANCÁRIO - ISENTOS* ‼️\n\n🚨*TAXAS DE HOJE ({hoje})*\n\n📍*PÓS-FIXADOS*\n"
+
+        for _, row in separar_por_indexador(bancarios_isentos, 'CDI').iterrows():
+            mensagem += formatar_ativo(row) + '\n'
+
+        mensagem += "\n📍*PRÉ-FIXADOS*\n"
+        for _, row in separar_por_indexador(bancarios_isentos, 'PRÉ').iterrows():
+            mensagem += formatar_ativo(row) + '\n'
+
+        mensagem += "\n‼️ *DESTAQUE CRÉDITO BANCÁRIO - NÃO ISENTOS* ‼️\n\n📍*PÓS-FIXADOS*\n"
+        for _, row in separar_por_indexador(bancarios_nao_isentos, 'CDI').iterrows():
+            mensagem += formatar_ativo(row) + '\n'
+
+        mensagem += "\n📍*PRÉ-FIXADOS*\n"
+        for _, row in separar_por_indexador(bancarios_nao_isentos, 'PRÉ').iterrows():
+            mensagem += formatar_ativo(row) + '\n'
+
+        # Exibir resultado
+        st.subheader("📋 Mensagem Gerada")
+        st.text_area("Copie e cole a mensagem abaixo no WhatsApp:", value=mensagem, height=600)
+
+    except Exception as e:
+        st.error(f"Erro ao processar a planilha: {e}")
