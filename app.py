@@ -30,6 +30,13 @@ if uploaded_file:
             nome = row['Emissor']
             venc = row['Vencimento'].strftime('%d/%m/%Y') if not pd.isnull(row['Vencimento']) else '---'
             taxa = row['Tx. Portal']
+                if isinstance(taxa, (int, float)) and taxa < 1:
+                    taxa_formatada = f"{taxa * 100:.0f}%"
+                elif isinstance(taxa, (int, float)):
+                    taxa_formatada = f"{taxa:.0f}%"
+                else:
+                    taxa_formatada = str(taxa)
+
             minimo = f"R$ {float(row['Aplicação mínima']):,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
             info = f"🏦*{produto} {nome}*\n⏰ Vencimento: {venc}\n📈 Taxa: {taxa}\n💰mínimo: {minimo}\n"
             return info
