@@ -23,10 +23,24 @@ if uploaded_file:
             return 'CDB' in produto.upper()
 
         def separar_top_3_por_indexador(df, tipo):
-            filtrado = df[df['Indexador'].str.upper().str.contains(tipo, na=False)]
-            # garantir que a coluna Tx. Portal seja numérica (ignorar erros se vier string)
-            filtrado['Tx. Portal'] = pd.to_numeric(filtrado['Tx. Portal'], errors='coerce')
-            return filtrado.sort_values(by='Tx. Portal', ascending=False).head(3)
+            filtrado = df[df['Indexador'].str.upper().str.contains(tipo, na=False)].copy()
+
+            # Converter taxa para número, mesmo que venha como string tipo "95,5% do CDI"
+            def extrair_numero(t):
+                if isinstance(t, str):
+                    t = t.replace('%', '').replace(',', '.')
+                    num = ''.join(c for c in t if (c.isdigit() or c == '.'))
+                    try:
+                        return float(num)
+                except:
+                        return None
+                elif isinstance(t, (int, float)):
+                    return t
+                return None
+
+            filtrado['taxa_num'] = filtrado['Tx. Portal'].apply(extrair_numero)
+            return filtrado.sort_values(by='taxa_num', ascending=False).head(3)
+
 
 
         def formatar_ativo(row):
