@@ -76,20 +76,20 @@ if uploaded_file:
 
         # Montar mensagem
         #hoje = datetime.today().strftime('%A %d/%m').capitalize()
-        mensagem = f"🚨*TAXAS DE HOJE ({hoje})*\n\n‼️ *DESTAQUE CRÉDITO BANCÁRIO - ISENTOS* ‼️\n\n📍*PÓS-FIXADOS*\n"
+        mensagem = f"🚨*TAXAS DE HOJE ({hoje})*\n\n‼️ *DESTAQUE CRÉDITO BANCÁRIO - ISENTOS* ‼️\n\n📍*PÓS-FIXADOS*\n\n"
 
         for _, row in separar_por_indexador(bancarios_isentos, 'CDI').iterrows():
             mensagem += formatar_ativo(row) + '\n'
 
-        mensagem += "\n📍*PRÉ-FIXADOS*\n"
+        mensagem += "\n📍*PRÉ-FIXADOS*\n\n"
         for _, row in separar_por_indexador(bancarios_isentos, 'PRE').iterrows():
             mensagem += formatar_ativo(row) + '\n'
 
-        mensagem += "\n‼️ *DESTAQUE CRÉDITO BANCÁRIO - NÃO ISENTOS* ‼️\n\n📍*PÓS-FIXADOS*\n"
+        mensagem += "\n‼️ *DESTAQUE CRÉDITO BANCÁRIO - NÃO ISENTOS* ‼️\n\n📍*PÓS-FIXADOS*\n\n"
         for _, row in separar_por_indexador(bancarios_nao_isentos, 'CDI').iterrows():
             mensagem += formatar_ativo(row) + '\n'
 
-        mensagem += "\n📍*PRÉ-FIXADOS*\n"
+        mensagem += "\n📍*PRÉ-FIXADOS*\n\n"
         for _, row in separar_por_indexador(bancarios_nao_isentos, 'PRÉ').iterrows():
             mensagem += formatar_ativo(row) + '\n'
 
