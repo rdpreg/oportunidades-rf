@@ -54,7 +54,7 @@ if uploaded_file:
         hoje = f"{dia_semana} {agora.strftime('%d/%m')}"
 
         # Montar mensagem
-        hoje = datetime.today().strftime('%A %d/%m').capitalize()
+        #hoje = datetime.today().strftime('%A %d/%m').capitalize()
         mensagem = f"‼️ *DESTAQUE CRÉDITO BANCÁRIO - ISENTOS* ‼️\n\n🚨*TAXAS DE HOJE ({hoje})*\n\n📍*PÓS-FIXADOS*\n"
 
         for _, row in separar_por_indexador(bancarios_isentos, 'CDI').iterrows():
